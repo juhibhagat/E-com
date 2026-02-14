@@ -2,9 +2,10 @@ const express = require("express");
 const product = require("../models/product");
 const productRoute = express.Router()
 
-productRoute.get("/",(req, res)=>{
+productRoute.get("/",async (req, res)=>{
     try{
-        res.status(200).json({message: "all product fetch"});
+        const products = await product.find();
+        res.status(200).json({message: "all product fetch", products});
         
     }catch(error){
         res.status(500).json({message: error})
